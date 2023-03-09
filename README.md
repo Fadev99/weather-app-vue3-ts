@@ -5,6 +5,12 @@
 yarn install
 ```
 
+## Version node & yarn
+```
+node: 18.12.1
+yarn: 1.22.19
+```
+
 ### Compiles and hot-reloads for development
 ```
 yarn serve
