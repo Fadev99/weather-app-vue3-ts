@@ -1,18 +1,40 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
-  </div>
+    <div class="container" :class="{ h__590: showContent, h__400: showError }">
+        <searchWeathers @showInfo="showInfo" />
+        <errorPage v-if="showError" />
+        <template v-else>
+            <infoWeathers />
+            <detailWeathers />
+        </template>
+    </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
+import { mapState } from "vuex";
+import searchWeathers from "@/components/searchWeathers.vue";
+import infoWeathers from "@/components/infoWeathers.vue";
+import errorPage from "@/components/errorPages.vue";
 
 export default defineComponent({
-  name: "HomeView",
-  components: {
-    HelloWorld,
-  },
+    name: "HomeView",
+    components: {
+        searchWeathers,
+        infoWeathers,
+        errorPage,
+    },
+    data() {
+        return {
+            showContent: false,
+        };
+    },
+    computed: {
+        ...mapState(["showError"]),
+    },
+    methods: {
+        showInfo(value: boolean) {
+            this.showContent = value;
+        },
+    },
 });
 </script>
